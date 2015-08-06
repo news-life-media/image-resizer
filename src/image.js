@@ -70,7 +70,7 @@ function Image(request){
 }
 
 Image.validInputFormats = ['jpeg', 'jpg', 'gif', 'png', 'webp'];
-Image.validFormats = ['jpeg', 'png', 'webp'];
+Image.validFormats = ['jpeg', 'png', 'webp', 'gif'];
 Image.formatErrorText = 'not valid image format';
 
 // Determine the name and format of the requested image
