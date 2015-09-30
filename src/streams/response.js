@@ -78,8 +78,7 @@ ResponseWriter.prototype._write = function(image){
     this.response.set({
       'Cache-Control':  'public,max-age='+image.expiry,
       'Expires':        this.expiresIn(image.expiry),
-      'Last-Modified':  (new Date(0)).toGMTString(),
-      'Vary':           'Accept-Encoding'
+      'Last-Modified':  (new Date(0)).toGMTString()
     });
   }
 
