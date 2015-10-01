@@ -110,9 +110,6 @@ Image.prototype.parseUrl = function(parts){
       parts.shift();
       this.path = parts.join('/');
     } else {
-      if (env.REQUEST_SIGNING_KEY) {
-        parts.shift();
-      }
       this.path = parts.join('/');
     }
   }
