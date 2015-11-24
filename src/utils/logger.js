@@ -9,9 +9,6 @@ slice     = [].slice;
 prefix    = env.LOG_PREFIX;
 queueLog  = env.QUEUE_LOG;
 
-chalk.enabled = true;
-
-
 function Logger(){
   this.queue = [];
   this.times = {};
