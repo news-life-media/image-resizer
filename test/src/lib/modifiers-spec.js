@@ -50,6 +50,39 @@ describe('Modifiers module', function(){
     });
   });
 
+  // Is not a real modifier
+  describe('No modifiers', function(){
+    it('should not set action to square', function(){
+      var request = '/stop/path/to/image.jpg';
+      mod.parse(request).action.should.equal('original');
+    });
+
+    it('should not set action to height', function(){
+      var request = '/hooops/path/to/image.jpg';
+      mod.parse(request).action.should.equal('original');
+    });
+
+    it('should not set action to width', function(){
+      var request = '/wooops/path/to/image.jpg';
+      mod.parse(request).action.should.equal('original');
+    });
+
+    it('should not set action to top', function(){
+      var request = '/yooops/path/to/image.jpg';
+      var p = mod.parse(request);
+      expect(p.y).to.be.empty;
+      p.hasModStr.should.equal(false);
+    });
+
+    it('should not set action to left', function(){
+      var request = '/xooops/path/to/image.jpg';
+      var p = mod.parse(request);
+      expect(p.x).to.be.empty;
+      p.hasModStr.should.equal(false);
+    });
+  });
+
+
 
   // Gravity
   describe('Gravity', function(){
