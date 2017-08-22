@@ -176,24 +176,33 @@ function parseModifiers(mods, modArr) {
 
       switch(mod.desc){
       case 'height':
-        mods.height = string.sanitize(value);
-        if (mods.height > dimensionLimit) {
-          mods.height = dimensionLimit;
+        value = string.sanitize(value);
+        if (value) {
+          mods.height = value;
+          if (mods.height > dimensionLimit) {
+            mods.height = dimensionLimit;
+          }
+          mods.hasModStr = true;
         }
-        mods.hasModStr = true;
         break;
       case 'width':
-        mods.width = string.sanitize(value);
-        if (mods.width > dimensionLimit) {
-          mods.width = dimensionLimit;
+        value = string.sanitize(value);
+        if (value) {
+          mods.width = value;
+          if (mods.width > dimensionLimit) {
+            mods.width = dimensionLimit;
+          }
+          mods.hasModStr = true;
         }
-        mods.hasModStr = true;
         break;
       case 'square':
-        mods.action = 'square';
-        mods.height = string.sanitize(value);
-        mods.width = string.sanitize(value);
-        mods.hasModStr = true;
+        value = string.sanitize(value);
+        if (value) {
+          mods.action = 'square';
+          mods.height = value;
+          mods.width = value;
+          mods.hasModStr = true;
+        }
         break;
       case 'gravity':
         value = string.sanitize(value, 'alpha');
@@ -203,12 +212,18 @@ function parseModifiers(mods, modArr) {
         mods.hasModStr = true;
         break;
       case 'top':
-        mods.y = string.sanitize(value);
-        mods.hasModStr = true;
+        value = string.sanitize(value);
+        if (value) {
+          mods.y = value;
+          mods.hasModStr = true;
+        }
         break;
       case 'left':
-        mods.x = string.sanitize(value);
-        mods.hasModStr = true;
+        value = string.sanitize(value);
+        if (value) {
+          mods.x = value;
+          mods.hasModStr = true;
+        }
         break;
       case 'crop':
         value = string.sanitize(value, 'alpha');
