@@ -22,7 +22,7 @@
     "image-resizer": "./bin/image_resizer.js"
   },
   "engines": {
-    "node": "5.11.x"
+    "node": "12.10.x"
   },
   "dependencies": {
     "aws-sdk": "~2.0.0-rc9",
@@ -38,24 +38,25 @@
     "mkdirp": "^0.5.0",
     "morgan": "^1.0.1",
     "request": "~2.34.0",
-    "sharp": "^0.15.0",
+    "sharp": "^0.23.4",
     "twit": "~1.1.15"
   },
   "devDependencies": {
-    "chai": "~1.9.0",
-    "connect-livereload": "~0.3.2",
-    "dotenv": "~0.2.8",
-    "ejs": "~1.0.0",
-    "gulp": "^3.8.10",
-    "gulp-bump": "^0.1.8",
-    "gulp-jshint": "~1.4.2",
-    "gulp-mocha": "~2.2.0",
-    "gulp-nodemon": "~1.0.0",
-    "gulp-util": "~2.2.14",
-    "jshint-stylish": "~0.1.5",
-    "proxyquire": "^1.7.9",
-    "sandboxed-module": "^1.0.0",
-    "sinon": "~1.8.2",
-    "sinon-chai": "~2.5.0"
+    "chai": "~4.2.0",
+    "connect-livereload": "~0.6.1",
+    "dotenv": "~8.2.0",
+    "ejs": "~3.0.1",
+    "gulp": "^4.0.2",
+    "gulp-bump": "^3.1.3",
+    "gulp-jshint": "~2.1.0",
+    "gulp-mocha": "~7.0.2",
+    "gulp-nodemon": "~2.4.2",
+    "gulp-util": "~3.0.8",
+    "jshint-stylish": "~2.2.1",
+    "proxyquire": "^2.1.3",
+    "sandboxed-module": "^2.0.3",
+    "sinon": "~8.0.4",
+    "sinon-chai": "~3.4.0",
+    "jshint": "^2.11.0-rc1"
   }
 }

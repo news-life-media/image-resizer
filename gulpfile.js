@@ -15,32 +15,33 @@ gulp.task('lint', function () {
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter(stylish));
 });
-gulp.task('lint:watch', ['lint'], function(){
+
+gulp.task('lint:watch', gulp.series('lint', function () {
   gulp.watch(
-    ['src/**/*.js', 'bin/**/*.js'],
-    function(event){
-      util.log('file changed:', util.colors.green(event.path));
-      gulp.src(event.path)
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter(stylish));
-    }
+      ['src/**/*.js', 'bin/**/*.js'],
+      function(event){
+        util.log('file changed:', util.colors.green(event.path));
+        gulp.src(event.path)
+            .pipe(jshint('.jshintrc'))
+            .pipe(jshint.reporter(stylish));
+      }
   );
-});
+}));
 
 gulp.task('test', function () {
-  gulp.src('test/**/*.js')
+  return gulp.src('test/**/*.js')
     .pipe(mocha({reporter: 'nyan'}))
     .on('error', function(err){
       console.log(err.toString());
       this.emit('end');
     });
 });
-gulp.task('test:watch', ['lint', 'test'], function (){
-  gulp.watch(
+gulp.task('test:watch', gulp.series('lint', 'test', function (){
+  return gulp.watch(
     ['src/**/*.js', 'test/**/*.js'],
     ['lint', 'test']
   );
-});
+}));
 
 function env(){
   var dotenv  = require('dotenv'),
@@ -69,14 +70,14 @@ function env(){
 }
 
 // gulp.task('watch', ['lint', 'test'], function () {
-gulp.task('watch', ['lint'], function () {
+gulp.task('watch', gulp.series('lint', function () {
   nodemon({
     script: 'test.js',
     ext: 'js html',
     env: env()
-  // }).on('restart', ['lint', 'test']);
+    // }).on('restart', ['lint', 'test']);
   }).on('restart', ['lint']);
-});
+}));
 
 gulp.task('bump:patch', function(){
   gulp.src('./package.json')
