@@ -22,18 +22,18 @@ module.exports = function () {
 
     image.log.time('optimize-sharp:' + image.format);
 
-    var r = sharp(image.contents);
+    var options = {};
 
     if (env.IMAGE_PROGRESSIVE) {
-      // ToDo: Figure out what this did, and fix it
-      // r.progressive();
+      options.progessive = (env.IMAGE_PROGRESSIVE === true);
     }
 
     // set the output quality
     if (image.modifiers.quality < 100) {
-      // ToDo: Figure out what this did, and fix it
-      // r.quality(image.modifiers.quality);
+      options.quality = image.modifiers.quality;
     }
+
+    var r = sharp(image.contents, options);
 
     // if a specific output format is specified, set it
     if (image.outputFormat) {
