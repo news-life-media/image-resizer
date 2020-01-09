@@ -25,12 +25,14 @@ module.exports = function () {
     var r = sharp(image.contents);
 
     if (env.IMAGE_PROGRESSIVE) {
-      r.progressive();
+      // ToDo: Figure out what this did, and fix it
+      // r.progressive();
     }
 
     // set the output quality
     if (image.modifiers.quality < 100) {
-      r.quality(image.modifiers.quality);
+      // ToDo: Figure out what this did, and fix it
+      // r.quality(image.modifiers.quality);
     }
 
     // if a specific output format is specified, set it
