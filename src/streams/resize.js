@@ -43,12 +43,18 @@ module.exports = function () {
 
     var r = sharp(image.contents);
 
+
+    // The following is deprecated in the Sharp Library.
+    // The new usage is as follows:
+    // `max().withoutEnlargement()` is now `resize(width, height, { fit: 'inside', withoutEnlargement: true })`.
+    //
+    // ============================
     // never enlarge an image beyond its original size, unless we're padding
     // the image, as even though this can count as an "enlargement" the padded
     // result can be reasonably generated in most cases.
-    if (image.modifiers.action !== 'crop' && image.modifiers.crop !== 'pad') {
-      r.withoutEnlargement();
-    }
+    // if (image.modifiers.action !== 'crop' && image.modifiers.crop !== 'pad') {
+    //  r.max().withoutEnlargement();
+    // }
 
     // if allowed auto rotate images, very helpful for photos off of an iphone
     // which are landscape by default and the metadata tells them what to show.
@@ -70,8 +76,8 @@ module.exports = function () {
       break;
 
     case 'resize':
-      r.resize(image.modifiers.width, image.modifiers.height);
-      r.max();
+      r.resize(image.modifiers.width, image.modifiers.height, {fit: 'inside', withoutEnlargement: true});
+      // r.max();
       r.toBuffer(resizeResponse);
       break;
 
@@ -88,7 +94,8 @@ module.exports = function () {
         // resize then crop the image
         r.resize(
             d.resize.width,
-            d.resize.height
+            d.resize.height,
+            {fit: 'inside', withoutEnlargement: true}
           ).extract({
             left: d.crop.x,
             top: d.crop.y,
@@ -111,15 +118,16 @@ module.exports = function () {
 
         switch(image.modifiers.crop){
         case 'fit':
-          r.resize(image.modifiers.width, image.modifiers.height);
-          r.max();
+          r.resize(image.modifiers.width, image.modifiers.height, {fit: 'inside', withoutEnlargement: true});
+          // r.max();
           break;
         case 'fill':
           d = dims.cropFill(image.modifiers, size);
 
           r.resize(
               d.resize.width,
-              d.resize.height
+              d.resize.height,
+              {fit: 'inside', withoutEnlargement: true}
             ).extract({
               left: d.crop.x,
               top: d.crop.y,
@@ -147,12 +155,13 @@ module.exports = function () {
           break;
         case 'scale':
           // TODO: deal with scale
-          r.resize(image.modifiers.width, image.modifiers.height);
+          r.resize(image.modifiers.width, image.modifiers.height, {fit: 'inside', withoutEnlargement: true});
           break;
         case 'pad':
           r.resize(
             image.modifiers.width,
-            image.modifiers.height
+            image.modifiers.height,
+            {fit: 'inside', withoutEnlargement: true}
           ).background(env.IMAGE_PADDING_COLOR || 'white').embed();
         }
 
