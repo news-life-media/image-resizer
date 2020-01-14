@@ -70,14 +70,14 @@ describe('Modifiers module', function(){
     it('should not set action to top', function(){
       var request = '/yooops/path/to/image.jpg';
       var p = mod.parse(request);
-      expect(p.y).to.be.empty;
+      expect(p.y).to.be.undefined;
       p.hasModStr.should.equal(false);
     });
 
     it('should not set action to left', function(){
       var request = '/xooops/path/to/image.jpg';
       var p = mod.parse(request);
-      expect(p.x).to.be.empty;
+      expect(p.x).to.be.undefined;
       p.hasModStr.should.equal(false);
     });
   });
